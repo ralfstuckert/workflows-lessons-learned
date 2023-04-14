@@ -4,9 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       coverage:
-      type: number
-      required: true
-      default: 17
+        type: number
+        required: true
+        default: 17
       
 jobs:
   build:
