@@ -18,13 +18,9 @@ jobs:
     env:
       PUSH_DOCKER_IMAGE: ${{ github.event_name != 'pull_request' }}
       IS_DEPENDABOT: ${{ github.actor == 'dependabot[bot]' }}
-      DO_DEBUG: ${{ inputs.debug == true && env.ALLOW_DEBUG == 'true' }}
       TAG: ${{ github.event.release.tag_name || github.event.inputs.version }} 
     steps:
     - name: push docker image
       if: env.PUSH_DOCKER_IMAGE == 'true'
       run: echo "pushing image $TAG"
-    - name: debug
-      if: env.DO_DEBUG == 'true'
-      run: echo "debugging"
     
