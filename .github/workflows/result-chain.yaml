@@ -1,0 +1,40 @@
+name: chain jobs based on result
+
+on:
+  workflow_dispatch:
+    inputs:
+      coverage:
+        type: number
+        required: true
+        default: "17"
+      
+jobs:
+  A:
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "A"
+    
+  B1:
+    runs-on: ubuntu-latest
+    needs: A
+    steps:
+    - run: echo "B1" && exit -1  
+      
+  B2:
+    needs: B1
+    runs-on: ubuntu-latest
+    if: successful()
+    steps:
+    - run: echo "B2"   
+    
+  C1:
+    needs: A
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "C1"   
+  C2:
+    needs: C1
+    runs-on: ubuntu-latest
+    if: successful()
+    steps:
+    - run: echo "C2"   
