@@ -2,11 +2,6 @@ name: chain jobs based on result
 
 on:
   workflow_dispatch:
-    inputs:
-      coverage:
-        type: number
-        required: true
-        default: "17"
       
 jobs:
   A:
@@ -23,7 +18,7 @@ jobs:
   B2:
     needs: B1
     runs-on: ubuntu-latest
-    if: successful()
+    if: success()
     steps:
     - run: echo "B2"   
     
@@ -35,6 +30,6 @@ jobs:
   C2:
     needs: C1
     runs-on: ubuntu-latest
-    if: successful()
+    if: success()
     steps:
     - run: echo "C2"   
