@@ -1,0 +1,25 @@
+name: badges with private data
+
+on:
+  workflow_dispatch:
+    inputs:
+      coverage:
+      type: number
+      required: true
+      default: 17
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Coverage Badge
+        uses: schneegans/dynamic-badges-action@v1.6.0
+        with:
+          gistID: e69b15698ed10309e00d973f12ebedef
+          auth: ${{ secrets.CREATE_GIST_PAT }}
+          filename: badge.json
+          label: coverage
+          message: '${{ inputs.coverage }}%'
+          valColorRange: ${{ inputs.coverage }}
+          maxColorRange: 90
+          minColorRange: 50
