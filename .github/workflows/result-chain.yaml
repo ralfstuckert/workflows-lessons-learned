@@ -13,14 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: A
     steps:
-    - run: echo "B1" && exit -1  
-      
+    - run: echo "B1" && exit -1        
   B2:
     needs: B1
     runs-on: ubuntu-latest
-    if: success()
     steps:
     - run: echo "B2"   
+  B3:
+    needs: B2
+    runs-on: ubuntu-latest
+    if: success()
+    steps:
+    - run: echo "B3"   
     
   C1:
     needs: A
@@ -28,8 +32,13 @@ jobs:
     steps:
     - run: echo "C1"   
   C2:
-    needs: C1
+    needs: A
+    runs-on: ubuntu-latest
+    steps:
+    - run: echo "C2"   
+  C3:
+    needs: C2
     runs-on: ubuntu-latest
     if: success()
     steps:
-    - run: echo "C2"   
+    - run: echo "C3"   
