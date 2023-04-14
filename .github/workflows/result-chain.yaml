@@ -22,7 +22,7 @@ jobs:
   B3:
     needs: B2
     runs-on: ubuntu-latest
-    if: success()
+    if: failure()
     steps:
     - run: echo "B3"   
     
