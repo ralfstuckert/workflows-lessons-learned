@@ -32,7 +32,7 @@ jobs:
     steps:
     - run: echo "C1"   
   C2:
-    needs: A
+    needs: C1
     runs-on: ubuntu-latest
     steps:
     - run: echo "C2"   
