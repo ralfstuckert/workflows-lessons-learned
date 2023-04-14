@@ -12,14 +12,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Create Coverage Badge
-        uses: schneegans/dynamic-badges-action@v1.6.0
-        with:
-          gistID: ${{ secrets.GIST_ID }}
-          auth: ${{ secrets.CREATE_GIST_PAT }}
-          filename: badge.json
-          label: coverage
-          message: '${{ inputs.coverage }}%'
-          valColorRange: ${{ inputs.coverage }}
-          maxColorRange: 90
-          minColorRange: 50
+    - run: echo "huhu"
+#      - name: Create Coverage Badge
+#        uses: schneegans/dynamic-badges-action@v1.6.0
+#        with:
+#          gistID: ${{ secrets.GIST_ID }}
+#          auth: ${{ secrets.CREATE_GIST_PAT }}
+#          filename: badge.json
+#          label: coverage
+#          message: "${{ inputs.coverage }}%"
+#          valColorRange: ${{ inputs.coverage }}
+#          maxColorRange: 90
+#          minColorRange: 50
