@@ -1,12 +1,11 @@
 name: conditions as variables
 
 on:
+  release:
+    types:
+      - released
   workflow_dispatch:
     inputs:
-      debug:
-        type: boolean
-        required: false
-        default: false
       version:
         type: string
         required: true
@@ -16,11 +15,19 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      PUSH_DOCKER_IMAGE: ${{ github.event_name != 'pull_request' }}
+      BUILD_DOCKER_IMAGE: ${{ github.event_name != 'pull_request' }}
       IS_DEPENDABOT: ${{ github.actor == 'dependabot[bot]' }}
       TAG: ${{ github.event.release.tag_name || github.event.inputs.version }} 
     steps:
+
+    - name: build docker image
+      if: env.BUILD_DOCKER_IMAGE == 'true'
+      run: echo "building docker image"
+
+    - name: some step
+      run: echo "some step"
+      
     - name: push docker image
-      if: env.PUSH_DOCKER_IMAGE == 'true'
+      if: env.BUILD_DOCKER_IMAGE == 'true'
       run: echo "pushing image $TAG"
     
