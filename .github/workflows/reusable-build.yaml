@@ -1,0 +1,57 @@
+name: reusable build
+
+on:
+  workflow_call:
+    inputs:
+      environment:
+        description: "The optional environment to use (e.g. for accessing environment secrets)"
+        required: false
+        type: string
+      runner:
+        description: "the runner to use"
+        default: "ubuntu-latest"
+        type: string
+        required: false
+      project-root:
+        description: "the root of the project, default is '.'"
+        default: "."
+        type: string
+        required: false
+    outputs:
+       image-version: 
+         description: "the image-version. Intended to be used on CI builds only, as this value is caclulated in this workflow. On Release the version is already given as an input paranmeter."
+         value: ${{ jobs.build.outputs.image-version }}
+      
+jobs:
+  build:
+    runs-on: ${{ inputs.runner }}
+    environment: ${{ inputs.environment }}
+    env:
+      WORKFLOW_VERSION: 1.1.9
+      PROJECT_ROOT: ${{ inputs.project-root }}
+      IS_DEPENDABOT: ${{ github.actor == 'dependabot[bot]' }}
+      PUSH_DOCKER_IMAGE: ${{ github.event_name != 'pull_request' }}
+    outputs:
+       image-version: ${{ env.IMAGE_VERSION }}
+    steps:
+    - name: check strict parameters
+      shell: bash
+      run: |
+        echo "checking strict parameters"
+        if [[ ( ${{ inputs.debug }} != 'false' ) && ( $ALLOW_DEBUG !=  'true' ) ]]; then echo "::error ::you are not authorized to debug"; exit 1; fi
+
+    - name: evaluate branch
+      shell: bash
+      run: |
+        echo "BRANCH=${{ github.head_ref || github.ref_name }}" >> $GITHUB_ENV;
+        echo "DEFAULT_BRANCH=${{ github.event.repository.default_branch }}" >> $GITHUB_ENV;
+
+    - name: determine image version
+      run: |
+        echo IMAGE_VERSION=SNAPSHOT-${{ github.run_number }} >> $GITHUB_ENV;
+
+    - name: Debug
+      if: always() && inputs.debug == true && env.ALLOW_DEBUG ==  'true'
+      uses: mxschmitt/action-tmate@v3
+      with:
+        timeout-minutes: 15
