@@ -37,7 +37,7 @@ jobs:
     runs-on: ${{ inputs.runner }}
     environment: ${{ inputs.environment }}
     env:
-      WORKFLOW_VERSION: v0.6.0
+      WORKFLOW_VERSION: v0.8.0
       PROJECT_ROOT: ${{ inputs.project-root }}
       IS_DEPENDABOT: ${{ github.actor == 'dependabot[bot]' }}
       PUSH_DOCKER_IMAGE: ${{ github.event_name != 'pull_request' }}
