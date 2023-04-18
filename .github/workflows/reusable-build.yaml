@@ -50,8 +50,8 @@ jobs:
             echo  "DO_DEBUG=true" >> $GITHUB_ENV;
           else
             echo "::error ::you are not authorized to debug"; exit 1; 
-          fi;
-        fi;
+          fi
+        fi
         
     - uses: actions/checkout@v3
 
