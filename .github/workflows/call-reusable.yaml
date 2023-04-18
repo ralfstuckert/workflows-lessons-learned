@@ -10,7 +10,7 @@ jobs:
     with:
       runner: ubuntu-latest
       environment: develop
-      debug: true
+#      debug: true
       
   deploy:
     needs: build
