@@ -68,7 +68,7 @@ jobs:
       working-directory: ${{ inputs.project-root }}
       run: |
         if [[ ( $WORKFLOW_VERSION != '${{ steps.get-latest-release.outputs.release }}' ) ]]; then 
-          echo "::error ::you are using an outdated workflow version $WORKFLOW_VERSION"; exit 1; 
+          echo "::error ::you are using an outdated workflow version $WORKFLOW_VERSION, you must update to ${{ steps.get-latest-release.outputs.release }}"; exit 1; 
         fi
       
         
