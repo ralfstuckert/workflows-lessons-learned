@@ -1,3 +1,5 @@
+name: call reusable build
+
 on:
   workflow_dispatch:
 
@@ -8,7 +10,7 @@ jobs:
     with:
       runner: ubuntu-latest
       environment: develop
-      debug: false
+      debug: true
       
   deploy:
     needs: build
