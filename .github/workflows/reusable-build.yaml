@@ -37,7 +37,7 @@ jobs:
     runs-on: ${{ inputs.runner }}
     environment: ${{ inputs.environment }}
     env:
-      WORKFLOW_VERSION: 1.1.9
+      WORKFLOW_VERSION: v0.6.0
       PROJECT_ROOT: ${{ inputs.project-root }}
       IS_DEPENDABOT: ${{ github.actor == 'dependabot[bot]' }}
       PUSH_DOCKER_IMAGE: ${{ github.event_name != 'pull_request' }}
@@ -67,7 +67,7 @@ jobs:
       shell: bash
       working-directory: ${{ inputs.project-root }}
       run: |
-        if [[ ( '$WORKFLOW_VERSION' != '${{ steps.keydb.outputs.release }}' ) ]]; then 
+        if [[ ( '$WORKFLOW_VERSION' != '${{ steps.get-latest-release.outputs.release }}' ) ]]; then 
           echo "::error ::you are using an outdated workflow version $WORKFLOW_VERSION"; exit 1; 
         fi
       
