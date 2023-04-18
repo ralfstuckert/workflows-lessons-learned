@@ -45,9 +45,7 @@ jobs:
       working-directory: ${{ inputs.project-root }}
       run: |
         echo "checking strict parameters"
-        if [[ ( ${{ inputs.debug }} != 'false' ) && ( $ALLOW_DEBUG !=  'true' ) ]]; then echo "::error ::you are not authorized to debug"; exit 1; fi
-      env:
-        ALLOW_DEBUG: ${{ env.ALLOW_DEBUG }}
+        if [[ ( ${{ inputs.debug }} != 'false' ) && ( ${{ vars.ALLOW_DEBUG }} !=  'true' ) ]]; then echo "::error ::you are not authorized to debug"; exit 1; fi
         
     - name: evaluate branch
       shell: bash
