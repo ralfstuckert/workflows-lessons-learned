@@ -1,0 +1,19 @@
+on:
+  workflow_dispatch:
+
+
+jobs:
+  build:
+    uses: ./.github/workflows/reusable-build.yaml
+    with:
+      runner: ubuntu-latest
+      environment: develop
+      debug: false
+      
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - run: |
+        echo "deploying version ${{ needs.build.outputs.image-version }}"
+    
