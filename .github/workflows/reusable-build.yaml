@@ -45,8 +45,8 @@ jobs:
       working-directory: ${{ inputs.project-root }}
       run: |
         echo "checking strict parameters"
-        if [[ ( ${{ inputs.debug }} != 'false' ) ]]; then 
-          if [[ ${{ vars.ALLOW_DEBUG }} ==  'true' ]]; then 
+        if [[ ( '${{ inputs.debug }}' != 'false' ) ]]; then 
+          if [[ '${{ vars.ALLOW_DEBUG }}' ==  'true' ]]; then 
             echo  "DO_DEBUG=true" >> $GITHUB_ENV;
           else
             echo "::error ::you are not authorized to debug"; exit 1; 
