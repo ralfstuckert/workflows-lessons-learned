@@ -58,6 +58,20 @@ jobs:
           fi
         fi
         
+    - id: get-latest-release
+      uses: pozetroninc/github-action-get-latest-release@v0.7.0
+      with:
+        repository: ralfstuckert/workflows-lessons-learned
+        excludes: prerelease, draft
+    - name: check workflow version
+      shell: bash
+      working-directory: ${{ inputs.project-root }}
+      run: |
+        if [[ ( $WORKFLOW_VERSION != ${{ steps.keydb.outputs.release }} ) ]]; then 
+          echo "::error ::you are using an outdated workflow version $WORKFLOW_VERSION"; exit 1; 
+        fi
+      
+        
     - uses: actions/checkout@v3
     
     - name: evaluate branch
