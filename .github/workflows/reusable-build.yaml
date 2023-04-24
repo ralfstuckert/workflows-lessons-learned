@@ -92,6 +92,13 @@ jobs:
       run: |
         ${{ inputs.build-command }}
 
+    - name: push docker image
+      if: env.PUSH_DOCKER_IMAGE == 'true'
+      shell: bash
+      working-directory: ${{ inputs.project-root }}
+      run: |
+        echo "push docker image version $IMAGE_VERSION"
+      
 
     - name: Debug
       if: always() && env.DO_DEBUG == 'true'
