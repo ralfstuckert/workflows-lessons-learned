@@ -8,8 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Delete workflow runs
-        uses: Mattraks/delete-workflow-runs@v2
-        with:
-          retain_days: 1
-          keep_minimum_runs: 1
+     - name: Delete workflow runs
+       uses: MajorScruffy/delete-old-workflow-runs@v0.2.0
+       with:
+         repository: ${github.repository}
+         older-than-seconds: 100                          
+       env:
+         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
