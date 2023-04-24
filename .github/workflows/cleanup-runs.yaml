@@ -6,6 +6,8 @@ on:
 jobs:
   clean:
     runs-on: ubuntu-latest
+    permissions:
+      actions: write
 
     steps:
     - name: Delete workflow runs
