@@ -12,3 +12,5 @@ jobs:
         uses: Mattraks/delete-workflow-runs@v2
         with:
           retain_days: 0
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
