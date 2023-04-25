@@ -23,7 +23,7 @@ on:
         type: string
         required: false
       debug:
-        description: "debug build on runner"
+        description: "debug build on runner. This must be authorized by admin"
         default: false
         type: boolean
         required: false
