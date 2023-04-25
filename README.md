@@ -172,8 +172,11 @@ jobs:
           echo "::error ::you are using an outdated workflow version $WORKFLOW_VERSION, you must update to ${{ steps.get-latest-release.outputs.release }}"; exit 1; 
         fi
 ```
+![allow-debug environment variable](pics/allow-debug-env-var.png)
+
 
 ## Badges accessing private data
+![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/ralfstuckert/0d07669ba32bae935e2f68935ff4d7d6/raw/badge.json)
 ```yaml
       - name: Code Coverage Report
         id: coverage
@@ -190,6 +193,9 @@ jobs:
           maxColorRange: 90
           minColorRange: 50
 ```
-
+[Gist](https://gist.github.com/ralfstuckert/0d07669ba32bae935e2f68935ff4d7d6)
+```json
+{ "schemaVersion": 1, "label": "coverage", "message": "30%", "color": "hsl(0, 100%, 40%)" }
+```
 
 
