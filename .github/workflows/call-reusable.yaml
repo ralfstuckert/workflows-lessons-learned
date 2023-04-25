@@ -11,7 +11,7 @@ jobs:
       runner: ubuntu-latest
       environment: develop
       build-command: 'echo "building branch $BRANCH"'
-      debug: true
+#      debug: true
 
       
   deploy:
