@@ -19,6 +19,7 @@ jobs:
     environment: ${{ inputs.environment }}
 ```
 
+
 ## Support project located in sub-directories
 ```yaml
 on:
@@ -38,6 +39,7 @@ on:
       run: echo "do some stuff"
 ```
 
+
 ## Make commands configurable
 ```yaml
 on:
@@ -55,6 +57,7 @@ on:
       working-directory: ${{ inputs.project-root }}
       run: ${{ inputs.run-build-cmd }}
 ```
+      
       
 ## Pass calculated values as output
 ```yaml
@@ -78,6 +81,7 @@ jobs:
         echo IMAGE_VERSION=SNAPSHOT-${{ github.run_number }} >> $GITHUB_ENV;
 ```
 
+
 ## Provide common data as (env-) variables
 ```yaml
     ...
@@ -89,6 +93,7 @@ jobs:
         echo "BRANCH=${{ github.head_ref || github.ref_name }}" >> $GITHUB_ENV;
         echo "DEFAULT_BRANCH=${{ github.event.repository.default_branch }}" >> $GITHUB_ENV;
 ```
+
 
 ## Provide repeated expressions as (env-) variables
 ```yaml
@@ -104,6 +109,7 @@ jobs:
       if: env.PUSH_DOCKER_IMAGE == 'true'
 ```
 
+
 ## Always provide optional debug step
 ```yaml
     steps:
@@ -114,6 +120,7 @@ jobs:
       with:
         timeout-minutes: 15
 ```
+
 
 ## Prohibit exclusive functionality
 ```yaml
@@ -146,6 +153,9 @@ on:
    - name: Debug
       if: always() && env.DO_DEBUG == 'true'
 ```
+![allow-debug environment variable](pics/allow-debug-env-var.png)
+
+
 
 ## Force workflow updates
 ```yaml
@@ -172,11 +182,11 @@ jobs:
           echo "::error ::you are using an outdated workflow version $WORKFLOW_VERSION, you must update to ${{ steps.get-latest-release.outputs.release }}"; exit 1; 
         fi
 ```
-![allow-debug environment variable](pics/allow-debug-env-var.png)
 
 
 ## Badges accessing private data
 ![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/ralfstuckert/0d07669ba32bae935e2f68935ff4d7d6/raw/badge.json)
+https://schneegans.github.io/tutorials/2022/04/18/badges
 ```yaml
       - name: Code Coverage Report
         id: coverage
